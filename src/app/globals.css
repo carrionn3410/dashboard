@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens — light par défaut, .dark sur <html> pour le mode sombre */
+:root {
+  --background: #f9f9f7; /* plan de page */
+  --card: #fcfcfb; /* surfaces */
+  --foreground: #0b0b0b; /* encre primaire */
+  --muted-foreground: #52514e; /* encre secondaire */
+  --faint: #898781; /* axes, labels discrets */
+  --border: rgba(11, 11, 11, 0.1); /* hairline */
+  --grid: #e1e0d9; /* quadrillage graphiques */
+  --accent: rgba(11, 11, 11, 0.045); /* wash de survol */
+  --primary: #2a78d6;
+  --primary-foreground: #ffffff;
+  --chart-1: #2a78d6; /* bleu — série 1 */
+  --chart-2: #1baf7a; /* aqua — série 2 */
+  --good: #0ca30c;
+  --good-text: #006300; /* delta ↑ positif */
+  --warning: #fab219;
+  --critical: #d03b3b;
+}
+
+.dark {
+  --background: #0d0d0d;
+  --card: #1a1a19;
+  --foreground: #ffffff;
+  --muted-foreground: #c3c2b7;
+  --faint: #898781;
+  --border: rgba(255, 255, 255, 0.1);
+  --grid: #2c2c2a;
+  --accent: rgba(255, 255, 255, 0.06);
+  --primary: #3987e5;
+  --primary-foreground: #ffffff;
+  --chart-1: #3987e5;
+  --chart-2: #199e70;
+  --good: #0ca30c;
+  --good-text: #0ca30c;
+  --warning: #fab219;
+  --critical: #d03b3b;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ————————————————————————————————————————————————
+   Dashboard personnel "Zen" — thèmes selon le moment
+   de la journée. Esthétique city-pop japonaise 80s :
+   ciels pastel, océan, sable, coucher de soleil.
+   ———————————————————————————————————————————————— */
+
+[data-zen] {
+  --z-ink: #1f3347; /* encre principale */
+  --z-ink-soft: rgba(31, 51, 71, 0.62);
+  --z-ink-faint: rgba(31, 51, 71, 0.4);
+  --z-surface: rgba(255, 252, 246, 0.72); /* cartes translucides */
+  --z-surface-strong: rgba(255, 252, 246, 0.92);
+  --z-line: rgba(31, 51, 71, 0.1);
+  --z-turquoise: #3eb8b0;
+  --z-ocean: #2a7fb8;
+  --z-salmon: #f0917d;
+  --z-sunset: #f2984e;
+  --z-sand: #ead9bd;
+  --z-palm: #3f9d6d;
+  --z-shadow: 0 8px 32px rgba(42, 90, 130, 0.1);
+}
+
+[data-zen="morning"] {
+  --z-sky-from: #f7d9b8;
+  --z-sky-mid: #f6c9c0;
+  --z-sky-to: #bcdde9;
+  --z-sun: #f6b352;
+  --z-sea: #8fc3cf;
+  --z-sea-deep: #6fb0bf;
+  --z-city: #f2ede1;
+  --z-city-window: rgba(31, 51, 71, 0.22);
+  --z-reflect: rgba(255, 244, 214, 0.85);
+  --z-palm-tree: #2e6e51;
+  --z-water: rgba(126, 190, 209, 0.35);
+}
+
+[data-zen="afternoon"] {
+  --z-sky-from: #1663c7;
+  --z-sky-mid: #2f83d8;
+  --z-sky-to: #8fd0ec;
+  --z-sun: #fbe7a8;
+  --z-sea: #2fa3c4;
+  --z-sea-deep: #1f8bb0;
+  --z-city: #f8f5ec;
+  --z-city-window: rgba(31, 51, 71, 0.25);
+  --z-reflect: rgba(255, 255, 255, 0.9);
+  --z-palm-tree: #1f7a4d;
+  --z-water: rgba(42, 127, 184, 0.28);
+}
+
+[data-zen="evening"] {
+  --z-sky-from: #5c3d8f;
+  --z-sky-mid: #c65f9b;
+  --z-sky-to: #f4a9a0;
+  --z-sun: #fcd24e;
+  --z-sun-rim: #ef5b33;
+  --z-sea: #2f6fc0;
+  --z-sea-deep: #2a5fa8;
+  --z-city: #17123a;
+  --z-light: #f6d76a;
+  --z-reflect: rgba(255, 236, 170, 0.9);
+  --z-palm-tree: #17123a;
+  --z-water: rgba(146, 84, 120, 0.32);
+  --z-ink: #3a2438;
+  --z-ink-soft: rgba(58, 36, 56, 0.66);
+  --z-ink-faint: rgba(58, 36, 56, 0.42);
+  --z-surface: rgba(255, 248, 240, 0.72);
+  --z-surface-strong: rgba(255, 248, 240, 0.92);
+  --z-line: rgba(58, 36, 56, 0.12);
+  --z-shadow: 0 8px 32px rgba(120, 60, 80, 0.14);
+}
+
+[data-zen="night"] {
+  --z-sky-from: #070d21;
+  --z-sky-mid: #101c3a;
+  --z-sky-to: #23355e;
+  --z-sun: #e8eef6; /* lune */
+  --z-sea: #12203e;
+  --z-sea-deep: #0c1830;
+  --z-city: #0a0f24;
+  --z-light: #f2cf6b;
+  --z-reflect: rgba(226, 236, 248, 0.75);
+  --z-palm-tree: #0a0f24;
+  --z-water: rgba(90, 130, 180, 0.18);
+  --z-ink: #e8eef6;
+  --z-ink-soft: rgba(232, 238, 246, 0.65);
+  --z-ink-faint: rgba(232, 238, 246, 0.4);
+  --z-surface: rgba(20, 34, 58, 0.66);
+  --z-surface-strong: rgba(24, 40, 66, 0.92);
+  --z-line: rgba(232, 238, 246, 0.1);
+  --z-turquoise: #5ed4cc;
+  --z-salmon: #f4a58f;
+  --z-sunset: #f5b26e;
+  --z-palm: #62c493;
+  --z-ocean: #6db3dd;
+  --z-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Étoiles discrètes, uniquement la nuit */
+[data-zen="night"] .zen-stars {
+  background-image: radial-gradient(1px 1px at 12% 18%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+    radial-gradient(1px 1px at 28% 8%, rgba(255, 255, 255, 0.5) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 45% 22%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
+    radial-gradient(1px 1px at 63% 12%, rgba(255, 255, 255, 0.55) 50%, transparent 50%),
+    radial-gradient(1px 1px at 78% 26%, rgba(255, 255, 255, 0.75) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 90% 9%, rgba(255, 255, 255, 0.6) 50%, transparent 50%),
+    radial-gradient(1px 1px at 52% 5%, rgba(255, 255, 255, 0.45) 50%, transparent 50%),
+    radial-gradient(1px 1px at 8% 32%, rgba(255, 255, 255, 0.4) 50%, transparent 50%);
+}
+
+.zen-card {
+  background: var(--z-surface);
+  border: 1px solid var(--z-line);
+  border-radius: 1.25rem;
+  box-shadow: var(--z-shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+[data-zen] ::selection {
+  background: var(--z-turquoise);
+  color: white;
+}
+
+[data-zen] input:focus-visible,
+[data-zen] textarea:focus-visible,
+[data-zen] button:focus-visible {
+  outline: 2px solid var(--z-turquoise);
+  outline-offset: 2px;
+}
