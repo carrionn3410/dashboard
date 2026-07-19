@@ -1,12 +1,17 @@
 /** @type {import('next').NextConfig} */
+
+// basePath/export ne s'appliquent QUE pour le build GitHub Pages
+// (npm run build:pages) — en dev local (npm run dev) et en build normal,
+// l'app reste servie à la racine http://localhost:3000/.
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+
 const nextConfig = {
-  // Export statique pour héberger sur GitHub Pages (repo "dashboard" →
-  // servi sous /dashboard/). Sans backend : tout l'état vit déjà en
-  // localStorage côté client, donc l'export statique fonctionne tel quel.
-  output: "export",
-  basePath: "/dashboard",
-  assetPrefix: "/dashboard/",
-  images: { unoptimized: true },
+  ...(isGithubPages && {
+    output: "export",
+    basePath: "/dashboard",
+    assetPrefix: "/dashboard/",
+    images: { unoptimized: true },
+  }),
 };
 
 export default nextConfig;
