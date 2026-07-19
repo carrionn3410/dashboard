@@ -60,95 +60,102 @@ body {
    ———————————————————————————————————————————————— */
 
 [data-zen] {
-  --z-ink: #1f3347; /* encre principale */
-  --z-ink-soft: rgba(31, 51, 71, 0.62);
-  --z-ink-faint: rgba(31, 51, 71, 0.4);
-  --z-surface: rgba(255, 252, 246, 0.72); /* cartes translucides */
-  --z-surface-strong: rgba(255, 252, 246, 0.92);
-  --z-line: rgba(31, 51, 71, 0.1);
-  --z-turquoise: #3eb8b0;
-  --z-ocean: #2a7fb8;
-  --z-salmon: #f0917d;
-  --z-sunset: #f2984e;
+  --z-ink: #1f1530; /* encre principale — violet-nuit, plus affirmée */
+  --z-ink-soft: rgba(31, 21, 48, 0.66);
+  --z-ink-faint: rgba(31, 21, 48, 0.44);
+  --z-surface: rgba(255, 252, 246, 0.74); /* cartes translucides */
+  --z-surface-strong: rgba(255, 252, 246, 0.94);
+  --z-line: rgba(31, 21, 48, 0.16);
+  --z-turquoise: #0fa89a; /* accents fonctionnels — vintage, plus saturés */
+  --z-ocean: #1f6fd6;
+  --z-salmon: #ff6f5e;
+  --z-sunset: #ff9a2e;
   --z-sand: #ead9bd;
-  --z-palm: #3f9d6d;
-  --z-shadow: 0 8px 32px rgba(42, 90, 130, 0.1);
+  --z-palm: #1f7a4d;
+  --z-neon: #e8368f; /* rose néon — 3ᵉ couleur des lumières de ville, liseré palmier */
+  --z-shadow: 0 10px 34px rgba(20, 10, 30, 0.18);
 }
 
 [data-zen="morning"] {
-  --z-sky-from: #f7d9b8;
-  --z-sky-mid: #f6c9c0;
-  --z-sky-to: #bcdde9;
-  --z-sun: #f6b352;
-  --z-sea: #8fc3cf;
-  --z-sea-deep: #6fb0bf;
-  --z-city: #f2ede1;
-  --z-city-window: rgba(31, 51, 71, 0.22);
-  --z-reflect: rgba(255, 244, 214, 0.85);
-  --z-palm-tree: #2e6e51;
-  --z-water: rgba(126, 190, 209, 0.35);
+  --z-sky-1: #3a2f66;
+  --z-sky-2: #b23a72;
+  --z-sky-3: #ff7d54;
+  --z-sky-4: #ffd166;
+  --z-sun: #fff1b0;
+  --z-sun-rim: #ff8f3d;
+  --z-sea: #17a3ad;
+  --z-sea-deep: #107f89;
+  --z-city: #1c1730;
+  --z-light: #ffd166;
+  --z-reflect: rgba(255, 232, 179, 0.9);
+  --z-palm-tree: #1c1730;
+  --z-water: rgba(23, 163, 173, 0.32);
 }
 
 [data-zen="afternoon"] {
-  --z-sky-from: #1663c7;
-  --z-sky-mid: #2f83d8;
-  --z-sky-to: #8fd0ec;
-  --z-sun: #fbe7a8;
-  --z-sea: #2fa3c4;
-  --z-sea-deep: #1f8bb0;
-  --z-city: #f8f5ec;
-  --z-city-window: rgba(31, 51, 71, 0.25);
-  --z-reflect: rgba(255, 255, 255, 0.9);
-  --z-palm-tree: #1f7a4d;
-  --z-water: rgba(42, 127, 184, 0.28);
+  --z-sky-1: #0a5fc7;
+  --z-sky-2: #1f8fe0;
+  --z-sky-3: #4db8ea;
+  --z-sky-4: #a9e9f2;
+  --z-sun: #ffe97a;
+  --z-sea: #12a6c9;
+  --z-sea-deep: #0c84a8;
+  --z-city: #fdf6e8;
+  --z-city-window: rgba(20, 20, 45, 0.4);
+  --z-reflect: rgba(255, 255, 255, 0.92);
+  --z-palm-tree: #0f6a3f;
+  --z-water: rgba(18, 166, 201, 0.3);
 }
 
 [data-zen="evening"] {
-  --z-sky-from: #5c3d8f;
-  --z-sky-mid: #c65f9b;
-  --z-sky-to: #f4a9a0;
-  --z-sun: #fcd24e;
+  --z-sky-1: #241249;
+  --z-sky-2: #7a2a86;
+  --z-sky-3: #e8368f;
+  --z-sky-4: #ffb14a;
+  --z-sun: #ffce3a;
   --z-sun-rim: #ef5b33;
-  --z-sea: #2f6fc0;
-  --z-sea-deep: #2a5fa8;
-  --z-city: #17123a;
-  --z-light: #f6d76a;
+  --z-sea: #12a6a0;
+  --z-sea-deep: #0c7d7a;
+  --z-city: #16121f;
+  --z-light: #ffce3a;
   --z-reflect: rgba(255, 236, 170, 0.9);
-  --z-palm-tree: #17123a;
-  --z-water: rgba(146, 84, 120, 0.32);
-  --z-ink: #3a2438;
-  --z-ink-soft: rgba(58, 36, 56, 0.66);
-  --z-ink-faint: rgba(58, 36, 56, 0.42);
-  --z-surface: rgba(255, 248, 240, 0.72);
-  --z-surface-strong: rgba(255, 248, 240, 0.92);
-  --z-line: rgba(58, 36, 56, 0.12);
-  --z-shadow: 0 8px 32px rgba(120, 60, 80, 0.14);
+  --z-palm-tree: #16121f;
+  --z-water: rgba(232, 54, 143, 0.28);
+  --z-ink: #2a1730;
+  --z-ink-soft: rgba(42, 23, 48, 0.68);
+  --z-ink-faint: rgba(42, 23, 48, 0.46);
+  --z-surface: rgba(255, 248, 240, 0.74);
+  --z-surface-strong: rgba(255, 248, 240, 0.94);
+  --z-line: rgba(42, 23, 48, 0.16);
+  --z-shadow: 0 10px 34px rgba(120, 20, 70, 0.22);
 }
 
 [data-zen="night"] {
-  --z-sky-from: #070d21;
-  --z-sky-mid: #101c3a;
-  --z-sky-to: #23355e;
+  --z-sky-1: #0a1230;
+  --z-sky-2: #171c46;
+  --z-sky-3: #2c2f6e;
+  --z-sky-4: #4d3f86;
   --z-sun: #e8eef6; /* lune */
-  --z-sea: #12203e;
-  --z-sea-deep: #0c1830;
+  --z-sea: #101c3a;
+  --z-sea-deep: #0a1226;
   --z-city: #0a0f24;
   --z-light: #f2cf6b;
-  --z-reflect: rgba(226, 236, 248, 0.75);
+  --z-reflect: rgba(226, 236, 248, 0.78);
   --z-palm-tree: #0a0f24;
-  --z-water: rgba(90, 130, 180, 0.18);
-  --z-ink: #e8eef6;
-  --z-ink-soft: rgba(232, 238, 246, 0.65);
-  --z-ink-faint: rgba(232, 238, 246, 0.4);
-  --z-surface: rgba(20, 34, 58, 0.66);
-  --z-surface-strong: rgba(24, 40, 66, 0.92);
-  --z-line: rgba(232, 238, 246, 0.1);
-  --z-turquoise: #5ed4cc;
-  --z-salmon: #f4a58f;
-  --z-sunset: #f5b26e;
-  --z-palm: #62c493;
-  --z-ocean: #6db3dd;
-  --z-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --z-water: rgba(77, 63, 134, 0.24);
+  --z-ink: #eae4f6;
+  --z-ink-soft: rgba(234, 228, 246, 0.68);
+  --z-ink-faint: rgba(234, 228, 246, 0.44);
+  --z-surface: rgba(22, 26, 52, 0.68);
+  --z-surface-strong: rgba(26, 30, 58, 0.94);
+  --z-line: rgba(234, 228, 246, 0.14);
+  --z-turquoise: #4fd6c8;
+  --z-salmon: #ff8a7a;
+  --z-sunset: #ffb25e;
+  --z-palm: #5ecf95;
+  --z-ocean: #6fa8f0;
+  --z-neon: #ff5fa8;
+  --z-shadow: 0 10px 34px rgba(0, 0, 0, 0.4);
 }
 
 /* Étoiles discrètes, uniquement la nuit */
@@ -165,11 +172,11 @@ body {
 
 .zen-card {
   background: var(--z-surface);
-  border: 1px solid var(--z-line);
-  border-radius: 1.25rem;
+  border: 1.5px solid var(--z-line);
+  border-radius: 0.85rem;
   box-shadow: var(--z-shadow);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 [data-zen] ::selection {

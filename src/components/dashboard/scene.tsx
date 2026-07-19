@@ -1,9 +1,10 @@
 "use client";
 
-// Décor "city-pop 80s" — composition originale en SVG plat :
-// ciel saturé, soleil à reflets en tirets, ville lointaine (lumières la
-// nuit, immeubles modernistes le jour), palmier en silhouette, grain de
-// toile. Toutes les couleurs viennent des variables CSS du thème.
+// Décor "vintage 80 city-pop" — composition originale en SVG plat :
+// ciel à quatre tons saturés, soleil cerclé d'encre à reflets en tirets,
+// ville lointaine (fenêtres multicolores la nuit, immeubles modernistes
+// crème le jour), palmier en silhouette, grain de trame façon sérigraphie.
+// Toutes les couleurs viennent des variables CSS du thème.
 
 export type ZenMoment = "morning" | "afternoon" | "evening" | "night";
 
@@ -25,23 +26,24 @@ function rng(seed: number) {
   };
 }
 
-// Lumières de la ville (soir/nuit) — petites fenêtres allumées au loin
+// Lumières de la ville (matin/soir/nuit) — fenêtres allumées au loin,
+// trois teintes façon néon : chaude, blanche, rose vif.
 const CITY_LIGHTS = (() => {
   const rand = rng(42);
-  const dots: { x: number; y: number; r: number; kind: "warm" | "white" | "red" }[] = [];
+  const dots: { x: number; y: number; r: number; kind: "warm" | "white" | "neon" }[] = [];
   for (let i = 0; i < 170; i++) {
     const p = rand();
     dots.push({
       x: Math.round(rand() * 1440),
       y: Math.round(HORIZON - 4 - rand() * 48),
       r: 1.3 + rand() * 1.3,
-      kind: p < 0.8 ? "warm" : p < 0.93 ? "white" : "red",
+      kind: p < 0.8 ? "warm" : p < 0.93 ? "white" : "neon",
     });
   }
   return dots;
 })();
 
-// Ligne d'arbres (matin/après-midi) — bosquets au loin
+// Ligne d'arbres (après-midi) — bosquets au loin
 const TREELINE = (() => {
   const rand = rng(7);
   const bumps: { x: number; r: number; o: number }[] = [];
@@ -51,26 +53,26 @@ const TREELINE = (() => {
   return bumps;
 })();
 
-function SunAndReflection({ moment }: { moment: ZenMoment }) {
-  const pos =
-    moment === "morning"
-      ? { cx: 420, cy: 468, r: 96 }
-      : moment === "afternoon"
-        ? { cx: 1030, cy: 208, r: 78 }
-        : moment === "evening"
-          ? { cx: 560, cy: 592, r: 128 }
-          : { cx: 1050, cy: 196, r: 54 };
+function sunPos(moment: ZenMoment) {
+  return moment === "morning"
+    ? { cx: 420, cy: 468, r: 96 }
+    : moment === "afternoon"
+      ? { cx: 1030, cy: 208, r: 78 }
+      : moment === "evening"
+        ? { cx: 560, cy: 592, r: 128 }
+        : { cx: 1050, cy: 196, r: 54 };
+}
 
-  const dashes = [150, 118, 94, 72, 54, 40, 28, 18];
-
+function Sun({ moment }: { moment: ZenMoment }) {
+  const pos = sunPos(moment);
   return (
     <>
       {/* halo très léger */}
-      <circle cx={pos.cx} cy={pos.cy} r={pos.r * 1.6} fill="var(--z-sun)" opacity={0.14} />
-      {/* disque, coupé net à l'horizon */}
+      <circle cx={pos.cx} cy={pos.cy} r={pos.r * 1.6} fill="var(--z-sun)" opacity={0.16} />
+      {/* disque cerclé d'encre, coupé net à l'horizon — signature poster vintage */}
       <g clipPath="url(#sky-clip)">
-        <circle cx={pos.cx} cy={pos.cy} r={pos.r} fill="var(--z-sun)" />
-        {/* liseré chaud à la base (soir uniquement) */}
+        <circle cx={pos.cx} cy={pos.cy} r={pos.r} fill="var(--z-sun)" stroke="var(--z-ink)" strokeOpacity={0.5} strokeWidth={2.5} />
+        {/* liseré chaud à la base (matin/soir) */}
         <ellipse
           cx={pos.cx}
           cy={HORIZON - 6}
@@ -80,27 +82,44 @@ function SunAndReflection({ moment }: { moment: ZenMoment }) {
           opacity={0.85}
         />
       </g>
-      {/* reflet en tirets, signature du style */}
-      <g>
-        {dashes.map((w, i) => (
-          <rect
-            key={i}
-            x={pos.cx - w / 2}
-            y={HORIZON + 22 + i * 19}
-            width={w}
-            height={4}
-            rx={2}
-            fill="var(--z-reflect)"
-            opacity={0.9 - i * 0.08}
-          />
-        ))}
-      </g>
     </>
   );
 }
 
+// Reflet en tirets — rendu APRÈS la mer pour rester visible par-dessus l'eau
+function Reflection({ moment }: { moment: ZenMoment }) {
+  const pos = sunPos(moment);
+  const dashes = [150, 118, 94, 72, 54, 40, 28, 18];
+  return (
+    <g>
+      {dashes.map((w, i) => (
+        <rect
+          key={i}
+          x={pos.cx - w / 2}
+          y={HORIZON + 22 + i * 19}
+          width={w}
+          height={4}
+          rx={2}
+          fill="var(--z-reflect)"
+          opacity={0.9 - i * 0.08}
+        />
+      ))}
+    </g>
+  );
+}
+
+// Fines lignes de houle — texture de mer façon poster sérigraphié
+function SeaTexture() {
+  return (
+    <g stroke="#ffffff" strokeOpacity={0.16} strokeWidth={1.5}>
+      <line x1={0} y1={HORIZON + 54} x2={1440} y2={HORIZON + 54} />
+      <line x1={0} y1={HORIZON + 92} x2={1440} y2={HORIZON + 92} />
+    </g>
+  );
+}
+
 function CityNight() {
-  // silhouettes de tours + fenêtres allumées
+  // silhouettes de tours cerclées de néon + fenêtres allumées multicolores
   const towers = [
     { x: 168, w: 48, h: 96 },
     { x: 238, w: 34, h: 64 },
@@ -114,7 +133,16 @@ function CityNight() {
       <rect x={0} y={HORIZON - 34} width={1440} height={34} fill="var(--z-city)" />
       {towers.map((t) => (
         <g key={t.x}>
-          <rect x={t.x} y={HORIZON - t.h} width={t.w} height={t.h} fill="var(--z-city)" />
+          <rect
+            x={t.x}
+            y={HORIZON - t.h}
+            width={t.w}
+            height={t.h}
+            fill="var(--z-city)"
+            stroke="var(--z-neon)"
+            strokeOpacity={0.45}
+            strokeWidth={1}
+          />
           <rect
             x={t.x + 5}
             y={HORIZON - t.h + 6}
@@ -130,7 +158,7 @@ function CityNight() {
           cx={d.x}
           cy={d.y}
           r={d.r}
-          fill={d.kind === "warm" ? "var(--z-light)" : d.kind === "white" ? "#ffffff" : "#e05252"}
+          fill={d.kind === "warm" ? "var(--z-light)" : d.kind === "white" ? "#ffffff" : "var(--z-neon)"}
           opacity={d.kind === "warm" ? 0.95 : 0.85}
         />
       ))}
@@ -139,7 +167,7 @@ function CityNight() {
 }
 
 function CityDay() {
-  // immeubles modernistes blancs + ligne d'arbres
+  // immeubles modernistes crème, cernés d'un trait d'encre + ligne d'arbres
   const slabs = [
     { x: 150, w: 52, h: 84 },
     { x: 226, w: 30, h: 52 },
@@ -152,7 +180,16 @@ function CityDay() {
     <>
       {slabs.map((s) => (
         <g key={s.x}>
-          <rect x={s.x} y={HORIZON - s.h} width={s.w} height={s.h} fill="var(--z-city)" />
+          <rect
+            x={s.x}
+            y={HORIZON - s.h}
+            width={s.w}
+            height={s.h}
+            fill="var(--z-city)"
+            stroke="var(--z-ink)"
+            strokeOpacity={0.22}
+            strokeWidth={1}
+          />
           {[...Array(Math.floor((s.h - 16) / 14))].map((_, i) => (
             <rect
               key={i}
@@ -202,15 +239,17 @@ function Birds() {
   );
 }
 
-function Palm() {
+function Palm({ neon }: { neon: boolean }) {
   // frondes = une feuille réutilisée en rotation autour de la couronne
   const angles = [-96, -72, -48, -22, 0, 24, 48, 74, 98];
+  const rim = neon ? { stroke: "var(--z-neon)", strokeOpacity: 0.55, strokeWidth: 1.5 } : {};
   return (
     <g transform="translate(1252 900)">
       {/* tronc en S, effilé */}
       <path
         d="M-9 0 C -20 -110, 12 -220, -6 -330 L 8 -330 C 22 -220, -6 -110, 14 0 Z"
         fill="var(--z-palm-tree)"
+        {...rim}
       />
       <g transform="translate(1 -330)">
         {angles.map((a) => (
@@ -219,23 +258,24 @@ function Palm() {
             d="M0 0 C 26 -14, 76 -22, 128 -10 C 78 -8, 34 -2, 8 8 Z"
             fill="var(--z-palm-tree)"
             transform={`rotate(${a - 90}) scale(${1 - Math.abs(a) / 400})`}
+            {...rim}
           />
         ))}
-        <circle cx={-8} cy={6} r={8} fill="var(--z-palm-tree)" />
-        <circle cx={7} cy={9} r={7} fill="var(--z-palm-tree)" />
+        <circle cx={-8} cy={6} r={8} fill="var(--z-palm-tree)" {...rim} />
+        <circle cx={7} cy={9} r={7} fill="var(--z-palm-tree)" {...rim} />
       </g>
     </g>
   );
 }
 
 export function Scene({ moment }: { moment: ZenMoment }) {
-  const isDusk = moment === "evening" || moment === "night";
+  const isLowLight = moment !== "afternoon"; // ville de nuit pour matin/soir/nuit, ville de jour l'après-midi
 
   return (
     <div
       aria-hidden
       className="pointer-events-none fixed inset-0 -z-10 overflow-hidden transition-colors duration-700"
-      style={{ background: "var(--z-sky-mid)" }}
+      style={{ background: "var(--z-sky-3)" }}
     >
       {/* Étoiles CSS (nuit uniquement) */}
       <div className="zen-stars absolute inset-x-0 top-0 h-1/2" />
@@ -247,9 +287,10 @@ export function Scene({ moment }: { moment: ZenMoment }) {
       >
         <defs>
           <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" style={{ stopColor: "var(--z-sky-from)" }} />
-            <stop offset="58%" style={{ stopColor: "var(--z-sky-mid)" }} />
-            <stop offset="100%" style={{ stopColor: "var(--z-sky-to)" }} />
+            <stop offset="0%" style={{ stopColor: "var(--z-sky-1)" }} />
+            <stop offset="35%" style={{ stopColor: "var(--z-sky-2)" }} />
+            <stop offset="68%" style={{ stopColor: "var(--z-sky-3)" }} />
+            <stop offset="100%" style={{ stopColor: "var(--z-sky-4)" }} />
           </linearGradient>
           <clipPath id="sky-clip">
             <rect x={0} y={0} width={1440} height={HORIZON} />
@@ -257,34 +298,42 @@ export function Scene({ moment }: { moment: ZenMoment }) {
           <pattern id="windows" width={10} height={13} patternUnits="userSpaceOnUse">
             <rect x={2} y={3} width={4.5} height={5.5} fill="var(--z-light, transparent)" opacity={0.9} />
           </pattern>
+          <pattern id="halftone" width={7} height={7} patternUnits="userSpaceOnUse">
+            <circle cx={1.3} cy={1.3} r={1.1} fill="var(--z-ink)" />
+          </pattern>
           <filter id="grain">
             <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch" />
             <feColorMatrix type="saturate" values="0" />
           </filter>
         </defs>
 
-        {/* Ciel */}
+        {/* Ciel — quatre tons */}
         <rect x={0} y={0} width={1440} height={HORIZON} fill="url(#sky)" />
 
-        {/* Soleil / lune + reflet */}
-        <SunAndReflection moment={moment} />
+        {/* Soleil / lune, cerclé d'encre */}
+        <Sun moment={moment} />
 
         {/* Mer en deux aplats */}
         <rect x={0} y={HORIZON} width={1440} height={900 - HORIZON} fill="var(--z-sea)" opacity={0.92} />
         <rect x={0} y={790} width={1440} height={110} fill="var(--z-sea-deep)" opacity={0.9} />
         <rect x={0} y={HORIZON} width={1440} height={2} fill="#ffffff" opacity={0.35} />
+        <SeaTexture />
+
+        {/* Reflet du soleil, par-dessus l'eau */}
+        <Reflection moment={moment} />
 
         {/* Ville au loin */}
-        {isDusk ? <CityNight /> : <CityDay />}
+        {isLowLight ? <CityNight /> : <CityDay />}
 
         {/* Ciel vivant : avion l'après-midi et le soir, oiseaux le matin */}
         {(moment === "afternoon" || moment === "evening") && <Plane />}
         {moment === "morning" && <Birds />}
 
         {/* Palmier au premier plan */}
-        <Palm />
+        <Palm neon={isLowLight} />
 
-        {/* Grain de toile */}
+        {/* Grain de trame façon sérigraphie */}
+        <rect x={0} y={0} width={1440} height={900} fill="url(#halftone)" opacity={0.05} />
         <rect x={0} y={0} width={1440} height={900} filter="url(#grain)" opacity={0.05} />
       </svg>
     </div>

@@ -42,6 +42,18 @@ export interface Habit {
   history: Record<string, boolean>; // clé = date ISO (YYYY-MM-DD)
 }
 
+export type JobCategory = "restauration" | "autres";
+export type JobStatus = "a_postuler" | "postule" | "entretien" | "refuse";
+
+export interface JobOffer {
+  id: string;
+  title: string;
+  category: JobCategory;
+  status: JobStatus;
+  url?: string;
+  addedAt: string;
+}
+
 export interface ZenState {
   version: 1;
   name: string;
@@ -53,6 +65,7 @@ export interface ZenState {
   notes: string;
   planning: PlanItem[];
   habits: Habit[];
+  jobs: JobOffer[];
   tasksCompletedTotal: number;
   goalsReached: number;
   workSeconds: Record<string, number>; // par date
@@ -94,6 +107,7 @@ const DEFAULT_STATE: ZenState = {
     { id: uid(), name: "IA", emoji: "🤖", history: {} },
     { id: uid(), name: "Langues", emoji: "🌍", history: {} },
   ],
+  jobs: [],
   tasksCompletedTotal: 0,
   goalsReached: 0,
   workSeconds: {},
