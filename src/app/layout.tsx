@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { PwaRegister } from "@/components/pwa-register";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -16,6 +17,17 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "Mon espace personnel de pilotage quotidien",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Dashboard",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#241249",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -27,6 +39,7 @@ export default function RootLayout({
     <html lang="fr">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
+        <PwaRegister />
       </body>
     </html>
   );

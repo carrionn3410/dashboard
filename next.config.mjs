@@ -1,15 +1,16 @@
 /** @type {import('next').NextConfig} */
 
-// basePath/export ne s'appliquent QUE pour le build GitHub Pages
+// NEXT_PUBLIC_BASE_PATH n'est défini que pour le build GitHub Pages
 // (npm run build:pages) — en dev local (npm run dev) et en build normal,
 // l'app reste servie à la racine http://localhost:3000/.
-const isGithubPages = process.env.GITHUB_PAGES === "true";
+// Préfixé NEXT_PUBLIC_ pour rester lisible aussi côté client (service worker).
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const nextConfig = {
-  ...(isGithubPages && {
+  ...(basePath && {
     output: "export",
-    basePath: "/dashboard",
-    assetPrefix: "/dashboard/",
+    basePath,
+    assetPrefix: `${basePath}/`,
     images: { unoptimized: true },
   }),
 };
