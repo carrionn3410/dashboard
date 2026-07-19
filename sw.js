@@ -4,7 +4,7 @@
 // pour les fichiers statiques (JS/CSS/icônes), qui ne changent jamais de
 // nom d'une build à l'autre (hashés par Next.js).
 
-const CACHE = "zen-dashboard-v1";
+const CACHE = "dashboard-shell-v1";
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();
