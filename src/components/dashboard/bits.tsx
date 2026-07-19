@@ -60,12 +60,14 @@ export function Editable({
   className,
   placeholder = "…",
   textarea = false,
+  inline = false,
 }: {
   value: string;
   onChange: (v: string) => void;
   className?: string;
   placeholder?: string;
   textarea?: boolean;
+  inline?: boolean;
 }) {
   const [editing, setEditing] = React.useState(false);
   const [draft, setDraft] = React.useState(value);
@@ -84,7 +86,8 @@ export function Editable({
       onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setDraft(e.target.value),
       onBlur: commit,
       className: cn(
-        "w-full rounded-lg border-none bg-transparent p-0 focus-visible:outline-none",
+        inline ? "inline-block w-48" : "w-full",
+        "rounded-lg border-none bg-transparent p-0 focus-visible:outline-none",
         className
       ),
       style: { color: "var(--z-ink)" },
@@ -103,7 +106,11 @@ export function Editable({
   return (
     <button
       onClick={() => setEditing(true)}
-      className={cn("block w-full cursor-text rounded-lg text-left transition-opacity duration-150 hover:opacity-70", className)}
+      className={cn(
+        inline ? "inline" : "block w-full",
+        "cursor-text rounded-lg text-left transition-opacity duration-150 hover:opacity-70",
+        className
+      )}
       style={{ color: value ? "var(--z-ink)" : "var(--z-ink-faint)" }}
       title="Cliquer pour modifier"
     >

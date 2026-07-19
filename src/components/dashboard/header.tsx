@@ -101,8 +101,21 @@ export function Header({
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl" style={{ color: "var(--z-ink)" }}>
-            {greeting}, {state.name}
+            {greeting},{" "}
+            <Editable
+              value={state.name}
+              onChange={(v) => set((s) => ({ ...s, name: v }))}
+              inline
+              placeholder="ton prénom"
+              className="text-3xl font-semibold tracking-tight sm:text-4xl"
+            />
           </h1>
+          <Editable
+            value={state.company}
+            onChange={(v) => set((s) => ({ ...s, company: v }))}
+            placeholder="Nom de l'entreprise ou du projet (optionnel)"
+            className="mt-0.5 text-sm"
+          />
           <p className="mt-1 text-sm capitalize" style={{ color: "var(--z-ink-soft)" }}>
             {date} · {time}
             {w && WeatherIcon && weather && (

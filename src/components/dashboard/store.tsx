@@ -57,6 +57,7 @@ export interface JobOffer {
 export interface ZenState {
   version: 1;
   name: string;
+  company: string;
   objective: string;
   focus: string;
   tasks: Task[];
@@ -78,34 +79,31 @@ const uid = () => Math.random().toString(36).slice(2, 9);
 
 const DEFAULT_STATE: ZenState = {
   version: 1,
-  name: "Kevin",
-  objective: "Faire avancer RestoBot d'un grand pas",
-  focus: "Préparer la démo pour le premier restaurant pilote",
+  name: "",
+  company: "",
+  objective: "",
+  focus: "",
   tasks: [
-    { id: uid(), label: "Appeler le restaurant pilote", done: false },
-    { id: uid(), label: "Réviser le cours terminal / Linux", done: false },
-    { id: uid(), label: "30 min de prospection", done: false },
+    { id: uid(), label: "Ta priorité n°1", done: false },
+    { id: uid(), label: "Ta priorité n°2", done: false },
+    { id: uid(), label: "Ta priorité n°3", done: false },
   ],
   projects: [
-    { id: uid(), name: "RestoBot", progress: 65, nextAction: "Déployer sur Vercel", due: "31 juil.", color: "var(--z-turquoise)" },
-    { id: uid(), name: "Bachelor full stack", progress: 40, nextAction: "TP terminal chapitre 2", due: "sept.", color: "var(--z-ocean)" },
-    { id: uid(), name: "Portfolio", progress: 20, nextAction: "Rédiger l'étude de cas", due: "août", color: "var(--z-salmon)" },
+    { id: uid(), name: "Nouveau projet 1", progress: 0, nextAction: "Définir la prochaine action", due: "date", color: "var(--z-turquoise)" },
+    { id: uid(), name: "Nouveau projet 2", progress: 0, nextAction: "Définir la prochaine action", due: "date", color: "var(--z-ocean)" },
+    { id: uid(), name: "Nouveau projet 3", progress: 0, nextAction: "Définir la prochaine action", due: "date", color: "var(--z-salmon)" },
   ],
   inbox: [],
   notes: "",
-  planning: [
-    { id: uid(), text: "Démo RestoBot 14h", bucket: "today", done: false },
-    { id: uid(), text: "Relancer la brasserie du port", bucket: "tomorrow", done: false },
-    { id: uid(), text: "Préparer la landing page", bucket: "week", done: false },
-  ],
+  planning: [],
   habits: [
     { id: uid(), name: "Sport", emoji: "🏃", history: {} },
     { id: uid(), name: "Lecture", emoji: "📖", history: {} },
     { id: uid(), name: "Travail profond", emoji: "🧠", history: {} },
     { id: uid(), name: "Création", emoji: "🎨", history: {} },
-    { id: uid(), name: "Prospection", emoji: "📞", history: {} },
-    { id: uid(), name: "IA", emoji: "🤖", history: {} },
-    { id: uid(), name: "Langues", emoji: "🌍", history: {} },
+    { id: uid(), name: "Hydratation", emoji: "💧", history: {} },
+    { id: uid(), name: "Sommeil", emoji: "😴", history: {} },
+    { id: uid(), name: "Méditation", emoji: "🧘", history: {} },
   ],
   jobs: [],
   tasksCompletedTotal: 0,
