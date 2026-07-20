@@ -1,0 +1,29 @@
+{
+  "updatedAt": "2026-07-19T22:00:00.000Z",
+  "offers": [
+    {
+      "title": "Conseiller de Vente H/F",
+      "company": "Bouygues Telecom",
+      "location": "Paris 16e",
+      "contract": "CDI",
+      "category": "autres",
+      "url": "https://www.hellowork.com/fr-fr/emplois/81364199.html"
+    },
+    {
+      "title": "Conseiller de Vente H/F",
+      "company": "Maty",
+      "location": "Paris 9e",
+      "contract": "CDI",
+      "category": "autres",
+      "url": "https://www.hellowork.com/fr-fr/emplois/80308259.html"
+    },
+    {
+      "title": "Chef de partie H/F",
+      "company": "Brasserie (8e arrondissement)",
+      "location": "Paris 8e",
+      "contract": "CDI",
+      "category": "restauration",
+      "url": "https://www.lhotellerie-restauration.fr/emploi/2a4e1d19/rejoignez-l-une-des-plus-belles-brasseri/b23a2985"
+    }
+  ]
+}

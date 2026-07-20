@@ -4,7 +4,17 @@ Application personnelle : priorités du jour, focus, projets, idées, notes,
 planning, habitudes et statistiques. Esthétique city-pop japonaise années 80,
 le fond change selon le moment de la journée.
 
-## Lancer l'application
+## 🔗 Lien en ligne (à partager)
+
+**https://carrionn3410.github.io/dashboard/**
+
+C'est le lien à envoyer à qui tu veux — il peut l'installer sur son téléphone
+ou son ordinateur comme une vraie application :
+- **iPhone (Safari)** : Partager 📤 → "Sur l'écran d'accueil"
+- **Android (Chrome)** : bandeau d'installation automatique, ou menu ⋮ → "Installer l'application"
+- **Mac/PC (Chrome, Edge)** : icône ⊕ dans la barre d'adresse → "Installer"
+
+## Lancer l'application (en local, pour développer)
 
 **Le plus simple** : double-clique sur `Démarrer.command`
 (la première fois, macOS demandera peut-être : clic droit → Ouvrir).

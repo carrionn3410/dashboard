@@ -5,9 +5,99 @@
 // postulé → entretien → refusé), lien optionnel vers l'annonce.
 
 import * as React from "react";
-import { ExternalLink, X } from "lucide-react";
+import { ExternalLink, Plus, X } from "lucide-react";
 import { useZen, type JobCategory, type JobStatus } from "./store";
 import { SectionTitle, ZenCard } from "./bits";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+interface SuggestedOffer {
+  title: string;
+  company: string;
+  location: string;
+  contract: string;
+  category: JobCategory;
+  url: string;
+}
+
+interface JobsFeed {
+  updatedAt: string;
+  offers: SuggestedOffer[];
+}
+
+// Suggestions trouvées automatiquement (voir tâche planifiée) — lecture
+// seule, distinctes du suivi personnel de candidatures ci-dessous.
+function JobSuggestions() {
+  const { set, uid } = useZen();
+  const [feed, setFeed] = React.useState<JobsFeed | null>(null);
+  const [added, setAdded] = React.useState<Set<string>>(new Set());
+
+  React.useEffect(() => {
+    fetch(`${basePath}/data/jobs.json`, { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then(setFeed)
+      .catch(() => {});
+  }, []);
+
+  if (!feed || feed.offers.length === 0) return null;
+
+  const addToTracking = (offer: SuggestedOffer) => {
+    set((s) => ({
+      ...s,
+      jobs: [
+        {
+          id: uid(),
+          title: `${offer.title} · ${offer.company} (${offer.location}) — ${offer.url}`,
+          category: offer.category,
+          status: "a_postuler",
+          addedAt: new Date().toISOString(),
+        },
+        ...s.jobs,
+      ],
+    }));
+    setAdded((prev) => new Set(prev).add(offer.url));
+  };
+
+  const updated = new Date(feed.updatedAt).toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "short",
+  });
+
+  return (
+    <div className="mb-4 rounded-xl border p-3" style={{ borderColor: "var(--z-line)", background: "var(--z-surface-strong)" }}>
+      <p className="mb-2 text-[11px] font-medium uppercase tracking-widest" style={{ color: "var(--z-ink-faint)" }}>
+        Suggestions du jour · {updated}
+      </p>
+      <div className="space-y-1.5">
+        {feed.offers.map((o) => (
+          <div key={o.url} className="flex items-center justify-between gap-2 rounded-lg px-1 py-1">
+            <a
+              href={o.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-w-0 flex-1 items-center gap-1.5 text-sm hover:opacity-70"
+              style={{ color: "var(--z-ink)" }}
+            >
+              <ExternalLink className="h-3 w-3 shrink-0" style={{ color: "var(--z-ink-faint)" }} />
+              <span className="truncate">
+                {o.title} · {o.company} <span style={{ color: "var(--z-ink-faint)" }}>({o.location}, {o.contract})</span>
+              </span>
+            </a>
+            <button
+              onClick={() => addToTracking(o)}
+              disabled={added.has(o.url)}
+              className="flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-[11px] font-medium transition-opacity duration-150 disabled:opacity-50"
+              style={{ background: "var(--z-turquoise)", color: "#fff" }}
+            >
+              <Plus className="h-3 w-3" />
+              {added.has(o.url) ? "Ajouté" : "Suivre"}
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const STATUS_CYCLE: JobStatus[] = ["a_postuler", "postule", "entretien", "refuse"];
 
@@ -114,6 +204,7 @@ export function JobSearchCard() {
       <SectionTitle emoji="🔎" hint="clic = changer le statut">
         Recherche d&apos;emploi
       </SectionTitle>
+      <JobSuggestions />
       <div className="flex flex-col gap-5 sm:flex-row">
         <JobColumn category="restauration" label="Offres restauration" />
         <JobColumn category="autres" label="Autres offres" />

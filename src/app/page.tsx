@@ -14,6 +14,7 @@ import { ProjectsCard } from "@/components/dashboard/projects";
 import { InboxCard, NotesCard, INBOX_INPUT_ID, NOTES_INPUT_ID } from "@/components/dashboard/capture";
 import { PlanningCard } from "@/components/dashboard/planning";
 import { JobSearchCard } from "@/components/dashboard/jobs";
+import { NewsCard } from "@/components/dashboard/news";
 import { HabitsCard, StatsCard } from "@/components/dashboard/habits";
 
 const MOMENT_CYCLE: (ZenMoment | "auto")[] = ["auto", "morning", "afternoon", "evening", "night"];
@@ -127,6 +128,11 @@ function DashboardInner() {
           <div id="zen-stats" className="scroll-mt-8">
             <StatsCard />
           </div>
+        </div>
+
+        {/* Actualités */}
+        <div id="zen-news" className="mt-4 scroll-mt-8">
+          <NewsCard />
         </div>
 
         <footer className="mt-8 text-center text-[11px]" style={{ color: "var(--z-ink-faint)" }}>

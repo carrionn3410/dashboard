@@ -3,7 +3,7 @@
 // Sidebar très discrète : un rail d'icônes qui défile en douceur
 // vers chaque section. Masquée sur mobile (tout est déjà vertical).
 
-import { BarChart3, Briefcase, Calendar, Flame, FolderOpen, Home, Lightbulb } from "lucide-react";
+import { BarChart3, Briefcase, Calendar, Flame, FolderOpen, Globe2, Home, Lightbulb } from "lucide-react";
 
 const LINKS = [
   { id: "zen-top", icon: Home, label: "Accueil" },
@@ -13,6 +13,7 @@ const LINKS = [
   { id: "zen-jobs", icon: Briefcase, label: "Recherche d'emploi" },
   { id: "zen-habits", icon: Flame, label: "Habitudes" },
   { id: "zen-stats", icon: BarChart3, label: "Statistiques" },
+  { id: "zen-news", icon: Globe2, label: "Actualités" },
 ];
 
 export function ZenSidebar() {
