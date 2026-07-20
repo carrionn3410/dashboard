@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T22:00:00.000Z",
+  "updatedAt": "2026-07-20T08:00:00.000Z",
   "offers": [
     {
       "title": "Conseiller de Vente H/F",
@@ -10,20 +10,20 @@
       "url": "https://www.hellowork.com/fr-fr/emplois/81364199.html"
     },
     {
-      "title": "Conseiller de Vente H/F",
-      "company": "Maty",
-      "location": "Paris 9e",
+      "title": "Conseillère de Vente H/F",
+      "company": "An'ge",
+      "location": "Paris 7e",
       "contract": "CDI",
       "category": "autres",
-      "url": "https://www.hellowork.com/fr-fr/emplois/80308259.html"
+      "url": "https://www.hellowork.com/fr-fr/emplois/80303280.html"
     },
     {
-      "title": "Chef de partie H/F",
-      "company": "Brasserie (8e arrondissement)",
-      "location": "Paris 8e",
-      "contract": "CDI",
+      "title": "Serveur H/F (extra)",
+      "company": "Café Joséphine",
+      "location": "Paris 1er",
+      "contract": "Extra",
       "category": "restauration",
-      "url": "https://www.lhotellerie-restauration.fr/emploi/2a4e1d19/rejoignez-l-une-des-plus-belles-brasseri/b23a2985"
+      "url": "http://www.lhotellerie-restauration.fr/emploi/77519638/cafe-josephine-paris-1er-face-musee-pino/06d2b81e"
     }
   ]
 }
