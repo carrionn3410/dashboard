@@ -5,9 +5,9 @@
   "author": "Kevin Chapon",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "build:pages": "NEXT_PUBLIC_BASE_PATH=/dashboard next build",
+    "dev": "node scripts/generate-manifest.mjs && next dev",
+    "build": "node scripts/generate-manifest.mjs && next build",
+    "build:pages": "NEXT_PUBLIC_BASE_PATH=/dashboard node scripts/generate-manifest.mjs && NEXT_PUBLIC_BASE_PATH=/dashboard next build",
     "icons": "node scripts/generate-icons.mjs",
     "start": "next start",
     "lint": "next lint"

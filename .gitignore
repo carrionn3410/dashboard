@@ -3,3 +3,7 @@ node_modules
 out
 next-env.d.ts
 tsconfig.tsbuildinfo
+
+# généré par scripts/generate-manifest.mjs (contenu différent selon
+# l'environnement : racine en dev, /dashboard sur GitHub Pages)
+/public/manifest.json
